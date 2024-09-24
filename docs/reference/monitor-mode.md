@@ -3,7 +3,7 @@ sidebar_label: Monitor mode
 sidebar_position: 50
 title: Monitor mode
 description: The Kubewarden monitor mode and how to activate it.
-keywords: [kubernetes, kubewarden, monitor mode]
+keywords: [kubernetes, kubewarden, monitor mode, protect mode]
 doc-persona: [kubewarden-user, kubewarden-operator, kubewarden-integrator]
 doc-type: [reference]
 doc-topic: [operator-manual, monitor-mode]
@@ -13,13 +13,9 @@ doc-topic: [operator-manual, monitor-mode]
   <link rel="canonical" href="https://docs.kubewarden.io/reference/monitor-mode"/>
 </head>
 
-When defining a policy,
-you can choose between two modes,
-specified in its [`spec.mode`](CRDs#admissionpolicyspec).
-By default, the policy is deployed in `mode: protect`,
-where it accepts, rejects, or mutates requests.
+When defining a policy, you can choose between two modes, specified in its [`spec.mode`](CRDs#admissionpolicyspec).
 
-One can choose to deploy a policy in monitor mode. In monitor mode:
+By default, the policy is deployed in `mode: monitor`, where:
 
 - The policy accepts all requests, as if the policy wasn't installed.
 - The `policy-server` traces the policy normally.
@@ -30,9 +26,9 @@ Therefore, it's easy to filter policies by mode, and focus on the ones deployed 
 
 The `mode` is an attribute included in the `ClusterAdmissionPolicy` and `AdmissionPolicy` resources.
 There are two values that the `mode` attribute can assume: `monitor` and `protect`.
-The `mode` defaults to `protect` if omitted.
+The `mode` defaults to `monitor` if omitted.
 
-To create a policy in `monitor mode` you to need include the `mode: monitor` as part of the specification of the resource.
+To create a policy in `protect mode` you to need include the `mode: protect` as part of the specification of the resource.
 For example, as highlighted, in this `ClusterAdmissionPolicy`:
 
 ```yaml
@@ -42,7 +38,7 @@ metadata:
   name: psp-capabilities
 spec:
 // highlight-next-line
-  mode: monitor
+  mode: protect
   policyServer: reserved-instance-for-tenant-a
   module: registry://ghcr.io/kubewarden/policies/psp-capabilities:v0.1.3
   rules:

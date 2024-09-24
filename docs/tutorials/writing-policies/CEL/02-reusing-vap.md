@@ -80,7 +80,7 @@ metadata:
 spec:
   module: registry://ghcr.io/kubewarden/policies/cel-policy:v1.0.0
   failurePolicy: Fail # (1). Defaults to "Fail"
-  mode: protect # (5). Defaults to "protect"
+  mode: protect # (5). Defaults to "monitor"
   rules: # (2)
     - apiGroups: ["apps"]
       apiVersions: ["v1"]
